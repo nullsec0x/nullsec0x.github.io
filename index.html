@@ -1,24 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random meme generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>> new tab</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      color: #222;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .centered-container {
+      width: fit-content; 
+      max-width: 90vw;    
+      margin: 0 auto;     
+      padding: 20px;
+    }
+
+    .terminal-line {
+      font-size: 1.1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #222;
+      width: 0ch;
+      animation: typing 2s steps(30) forwards, blink 0.8s step-end infinite;
+      margin-bottom: 60px;
+    }
+
+    @keyframes typing {
+      from { width: 0ch; }
+      to { width: 28ch; }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #222; }
+    }
+
+    .urls-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; 
+    }
+
+    .urls-label {
+      font-weight: normal;
+      font-style: italic;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      color: #444;
+    }
+
+    .urls-end {
+      font-weight: normal;
+      font-style: italic;
+      font-size: 1rem;
+      margin-top: 20px;
+      margin-left: 20px;
+      color: #444;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 10px 40px;
+      padding-left: 40px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .links a:hover {
+      color: #888;
+    }
+
+    .clock {
+      position: absolute;
+      bottom: 20px;
+      text-align: center;
+      width: 100%;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .links {
+        grid-template-columns: repeat(2, auto);
+        gap: 10px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1> Scrappy Meme Generator </h1>
-        <div class="meme-container">
-            <img id="meme-img" src="" alt="Random Meme">
-            <p id="meme-title">Click the button for a meme!</p>
-        </div>
-        <button onclick="generateMeme()"> Give Me a Meme!</button>
+  <div class="centered-container"> 
+    <div class="terminal-line" id="terminalText">nullsec0x@twinkpad > new tab</div>
+
+    <div class="urls-container">
+      <div class="urls-label">URLs &#123;</div>
+      <div class="links">
+        <a href="https://chat.openai.com">chatgpt</a>
+        <a href="https://www.4chan.org/">4chan</a>
+        <a href="https://www.reddit.com">reddit</a>
+        <a href="http://zqktlwi4fecvo6ri.onion/wiki/index.php/Main_Page">hidden wiki</a>
+        <a href="https://archive.org">archive</a>
+        <a href="https://www.wiby.me">wiby</a>
+        <a href="https://www.khanacademy.org">khan academy</a>
+        <a href="https://explainshell.com/">explain shell</a>
+        <a href="https://github.com/">github</a>
+        <a href="https://stevenuniverse.best/">cartoons</a>
+        <a href="https://hdtodayz.to/">movies</a>
+      </div>
+      <div class="urls-end">&#125;</div>
     </div>
-    <footer class="footer-text">
-        Made by <span class="heart">laformatik</span> with luv <span class="heart">&lt;3</span>
-    </footer>
-    <script src="app.js"></script>
+  </div>
+
+  <div class="clock" id="decimalClock"></div>
+
+  <script>
+    function updateDecimalClock() {
+      const now = new Date();
+      const secondsInDay = 86400;
+      const totalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+      const decimalTime = (totalSeconds / secondsInDay) * 10;
+      const hours = Math.floor(decimalTime);
+      const minutes = Math.floor((decimalTime - hours) * 100);
+      const seconds = Math.floor((((decimalTime - hours) * 100) - minutes) * 100);
+      document.getElementById("decimalClock").textContent =
+        `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    setInterval(updateDecimalClock, 1000);
+    updateDecimalClock();
+  </script>
 </body>
 </html>
